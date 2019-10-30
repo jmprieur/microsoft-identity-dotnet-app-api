@@ -12,20 +12,15 @@
     This section describes the Azure AD Applications to configure, and their dependencies
   */
   "AADApps": [
-   
     {
       "Id": "client",
-      "Name": "TodoListClient (active-directory-dotnet-native-aspnetcore-v2)",
+      "Name": "FindExpiredCerts",
       "Kind": "Desktop",
       "ReplyUrls": "https://login.microsoftonline.com/common/oauth2/nativeclient",
       "RequiredResourcesAccess": [
         {
           "Resource": "Microsoft Graph",
           "DelegatedPermissions": [ "Directory.AccessAsUser.All" ]
-        }
-      ],
-      "ManualSteps": [
-        {
         }
       ]
     }
@@ -41,14 +36,14 @@
     {
       "App": "client",
       "SettingKind": "Code",
-      "SettingFile": "\\..\\FindAppsWithExpiredCerts\\main.cs",
+      "SettingFile": "\\..\\FindAppsWithExpiredCerts\\FindAppsWithExpiredCerts\\Program.cs",
       "Mappings": [
         {
           "key": "tenant",
           "value": "$tenantName"
         },
         {
-          "key": "clientId",
+          "key": "clientId =",
           "value": ".AppId"
         }
       ]

@@ -1,11 +1,8 @@
-﻿using Microsoft.Identity.Client;
+using Microsoft.Identity.Client;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace FindAppsWithExpiredCerts
@@ -35,10 +32,23 @@ namespace FindAppsWithExpiredCerts
             httpClient.DefaultRequestHeaders.Add("Authorization", result.CreateAuthorizationHeader());
             string jsonString = await httpClient.GetStringAsync(endpoint);
 
-            // Exploit data from graph
-            dynamic apps = JsonSerializer.Deserialize<dynamic>(jsonString);
+            // Get apps from Graph
+            Apps apps = JsonSerializer.Deserialize<Apps>(jsonString);
 
-            Console.WriteLine("Finding expired certs");
+            // Find expired certificates
+            var appsWithExpiredCerts = apps.value.Select(a => new { app = a, expiredCerts = a.keyCredentials.Where(k => k.endDateTime < DateTime.Now) })
+                                                 .Where(a => a.expiredCerts.Any());
+
+            // Display the apps with their expired certificates
+            foreach(var appWithExpiredCerts in appsWithExpiredCerts)
+            {
+                var a = appWithExpiredCerts.app;
+                Console.WriteLine($"App displayName={a.displayName} AppId={a.appId} ");
+                foreach(var expiredCert in appWithExpiredCerts.expiredCerts)
+                {
+                    Console.WriteLine($"- EXPIRED Certificate '{expiredCert.displayName}' Id={expiredCert.customKeyIdentifier}");
+                }
+            }
 
 
         }
