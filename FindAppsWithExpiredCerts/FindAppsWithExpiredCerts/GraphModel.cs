@@ -12,6 +12,7 @@ namespace FindAppsWithExpiredCerts
     public class App
     {
         public string displayName { get; set; }
+        public string id { get; set; }
         public string appId { get; set; }
         public KeyCredential[] keyCredentials { get;set;}
     }
@@ -19,5 +20,15 @@ namespace FindAppsWithExpiredCerts
     public class Apps
     {
         public App[] value { get; set; }
+    }
+
+    public class Users
+    {
+        public User[] value { get; set; }
+    }
+
+    public class User
+    {
+        public string userPrincipalName { get; set; }
     }
 }
