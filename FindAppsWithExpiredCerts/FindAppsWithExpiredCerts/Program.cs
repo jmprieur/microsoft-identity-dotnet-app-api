@@ -14,7 +14,7 @@ namespace FindAppsWithExpiredCerts
         static private string clientId = "";
 
         // Graph app API
-        static private string[] scopes = new[] { "Directory.AccessAsUser.All", "User.ReadBasic.All" };
+        static private string[] scopes = new[] { "Directory.AccessAsUser.All" };
         static private string endpoint = "https://graph.microsoft.com/beta/applications";
 
         static async Task Main(string[] args)
