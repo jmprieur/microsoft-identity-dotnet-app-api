@@ -131,6 +131,11 @@ Clean the solution, rebuild the solution, and run it.  You might want to go into
 
 > Explain how to Explore the sample.
 
+## Next Steps
+
+this sample is mostly educative and uses the Microsoft Graph REST API, and a simplified object model to access its response
+The next steps would be to use the [Microsoft Graph SDK](https://docs.microsoft.com/en-us/graph/sdks/sdks-overview) 
+
 ## Community Help and Support
 
 Use [Stack Overflow](http://stackoverflow.com/questions/tagged/msal) to get support from the community.
